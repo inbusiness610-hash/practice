@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ page_title|default('Мой Календарь') }}</title>
+        <!-- Подключение стилей через Flask url_for -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            .ai-section {
+                margin-top: 14px;
+                padding-top: 12px;
+                border-top: 1px dashed var(--border-color, #e2e8f0);
+            }
+
+            .ai-label {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #6366f1;
+                margin-bottom: 6px;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .btn-ai {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+                color: white !important;
+                border: none !important;
+                white-space: nowrap;
+                transition: opacity 0.2s ease, transform 0.1s ease !important;
+            }
+
+            .btn-ai:hover {
+                opacity: 0.9;
+            }
+
+            .btn-ai:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prev-month" aria-label="Предыдущий месяц">&lt;</button>
+                <h2 id="month-year"></h2>
+                <button id="next-month" aria-label="Следующий месяц">&gt;</button>
+            </div>
+            <div class="calendar-body">
+                <div class="calendar-weekdays">
+                    {% for day in weekdays %}
+                        <div>{{ day }}</div>
+                    {% endfor %}
+                </div>
+                <div class="calendar-days" id="calendar-days"></div>
+            </div>
+            <div class="calendar-plans">
+                <h3 id="selected-date-title">Планы на день</h3>
+                <ul id="plan-list"></ul>
+                <div class="plan-input-group">
+                    <input type="text" id="plan-input" placeholder="Добавить вручную..." autocomplete="off">
+                    <button id="add-plan-btn">Добавить</button>
+                </div>
+
+
+                <div class="ai-section">
+                    <div class="ai-label">ИИ-Генератор планов</div>
+                    <div class="plan-input-group">
+                        <input type="text" id="ai-prompt-input" placeholder="Цель дня (напр. 'День учебы', 'Отдых')..." autocomplete="off">
+                        <button id="ai-generate-btn" class="btn-ai">Сгенерировать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+.env
+
+calendar/plans.json
+
+# Игнорируем виртуальное окружение и кэш Python
+venv/
+.venv/
+__pycache__/
+*.pyccalendar/.env
+.env

@@ -1,0 +1,278 @@
+/* ==========================================================================
+   1. Базовые настройки и переменные
+   ========================================================================== */
+:root {
+  --primary-color: #6366f1;       /* Основной акцентный цвет (индиго) */
+  --primary-hover: #4f46e5;       /* Цвет при наведении */
+  --bg-color: #f8fafc;            /* Общий фон страницы */
+  --card-bg: #ffffff;             /* Фон календаря */
+  --text-main: #0f172a;           /* Цвет основного текста */
+  --text-muted: #64748b;          /* Цвет второстепенного текста */
+  --border-color: #e2e8f0;        /* Цвет границ */
+  --hover-bg: #f1f5f9;            /* Фон элементов при наведении */
+  --radius: 16px;                 /* Скругление углов */
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  padding: 20px;
+}
+
+/* ==========================================================================
+   2. Контейнер календаря
+   ========================================================================== */
+.calendar {
+  width: 100%;
+  max-width: 380px;
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+}
+
+/* ==========================================================================
+   3. Шапка (Месяц, Год и Кнопки)
+   ========================================================================== */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.calendar-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.calendar-header button {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.calendar-header button:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-main);
+  border-color: #cbd5e1;
+}
+
+.calendar-header button:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   4. Сетка дней недели
+   ========================================================================== */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.calendar-weekdays div {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   5. Сетка дней месяца
+   ========================================================================== */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+/* Стили для одного дня (когда скрипт будет создавать div с числами) */
+.calendar-days div {
+  aspect-ratio: 1; /* Делает ячейку идеально квадратной */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+/* Обычный день при наведении */
+.calendar-days div:hover:not(.empty):not(.active) {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+}
+
+/* Выбранный / Текущий день (добавьте класс .active через JS) */
+.calendar-days div.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Неактивные дни из соседних месяцев (класс .inactive или .other-month) */
+.calendar-days div.inactive,
+.calendar-days div.other-month {
+  color: #cbd5e1;
+  cursor: default;
+}
+
+.calendar-days div.inactive:hover,
+.calendar-days div.other-month:hover {
+  background: transparent;
+}
+/* ==========================================================================
+   Дополнительные стили для дней
+   ========================================================================== */
+
+/* Текущий сегодняшний день (добавьте класс .today через JS) */
+.calendar-days div.today {
+  background-color: #e0e7ff;       /* Нежно-индиговый фон */
+  color: var(--primary-color);      /* Текст акцентного цвета */
+  font-weight: 700;                 /* Жирный шрифт */
+  border: 2px solid var(--primary-color); /* Выделение рамкой */
+}
+
+/* Если текущий день одновременно является и выбранным */
+.calendar-days div.today.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+/* ==========================================================================
+   6. Планы и Индикаторы (Под календарем)
+   ========================================================================== */
+
+/* Обязательно для позиционирования точки */
+.calendar-days div {
+  position: relative; 
+}
+
+/* Точка на дне, если есть план */
+.calendar-days div.has-plans::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
+
+.calendar-days div.active.has-plans::after {
+  background-color: #ffffff;
+}
+
+/* Разделитель и блок планов */
+.calendar-plans {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.calendar-plans h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+/* Список задач */
+#plan-list {
+  list-style: none;
+  max-height: 140px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+#plan-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--hover-bg);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+}
+
+#plan-list li button {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+#plan-list li button:hover {
+  background: #fee2e2;
+}
+
+/* Поле ввода */
+.plan-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.plan-input-group input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.plan-input-group input:focus {
+  border-color: var(--primary-color);
+}
+
+.plan-input-group button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.plan-input-group button:hover {
+  background: var(--primary-hover);
+}
