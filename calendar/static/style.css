@@ -1,17 +1,25 @@
 /* ==========================================================================
-   1. Базовые настройки и переменные
+   1. Базовые настройки и тёмные переменные
    ========================================================================== */
 :root {
-  --primary-color: #6366f1;       /* Основной акцентный цвет (индиго) */
-  --primary-hover: #4f46e5;       /* Цвет при наведении */
-  --bg-color: #f8fafc;            /* Общий фон страницы */
-  --card-bg: #ffffff;             /* Фон календаря */
-  --text-main: #0f172a;           /* Цвет основного текста */
-  --text-muted: #64748b;          /* Цвет второстепенного текста */
-  --border-color: #e2e8f0;        /* Цвет границ */
-  --hover-bg: #f1f5f9;            /* Фон элементов при наведении */
-  --radius: 16px;                 /* Скругление углов */
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    /* Тёмный фон и текст */
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #2d2d2d;
+    --text-main: #f0f0f0;
+    --text-muted: #a0a0a0;
+    
+    /* Акцентный фиолетовый / неоновый цвет */
+    --primary-color: #bb86fc;
+    --primary-hover: #9955e8;
+    
+    /* Инпуты, ховеры и формы */
+    --input-bg: #2a2a2a;
+    --hover-bg: #2d2d2d;
+    
+    /* Вспомогательные настройки */
+    --radius: 16px;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -79,7 +87,7 @@ body {
 .calendar-header button:hover {
   background-color: var(--hover-bg);
   color: var(--text-main);
-  border-color: #cbd5e1;
+  border-color: var(--primary-color);
 }
 
 .calendar-header button:active {
@@ -113,9 +121,8 @@ body {
   gap: 6px;
 }
 
-/* Стили для одного дня (когда скрипт будет создавать div с числами) */
 .calendar-days div {
-  aspect-ratio: 1; /* Делает ячейку идеально квадратной */
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,6 +132,8 @@ body {
   cursor: pointer;
   transition: all 0.15s ease;
   user-select: none;
+  position: relative;
+  color: var(--text-main);
 }
 
 /* Обычный день при наведении */
@@ -133,17 +142,17 @@ body {
   color: var(--primary-color);
 }
 
-/* Выбранный / Текущий день (добавьте класс .active через JS) */
+/* Выбранный день */
 .calendar-days div.active {
   background-color: var(--primary-color);
-  color: #ffffff;
-  font-weight: 600;
+  color: #121212;
+  font-weight: 700;
 }
 
-/* Неактивные дни из соседних месяцев (класс .inactive или .other-month) */
+/* Неактивные дни */
 .calendar-days div.inactive,
 .calendar-days div.other-month {
-  color: #cbd5e1;
+  color: #4a4a4a;
   cursor: default;
 }
 
@@ -151,33 +160,21 @@ body {
 .calendar-days div.other-month:hover {
   background: transparent;
 }
-/* ==========================================================================
-   Дополнительные стили для дней
-   ========================================================================== */
 
-/* Текущий сегодняшний день (добавьте класс .today через JS) */
+/* Текущий сегодняшний день */
 .calendar-days div.today {
-  background-color: #e0e7ff;       /* Нежно-индиговый фон */
-  color: var(--primary-color);      /* Текст акцентного цвета */
-  font-weight: 700;                 /* Жирный шрифт */
-  border: 2px solid var(--primary-color); /* Выделение рамкой */
+  background-color: #2a2238;
+  color: var(--primary-color);
+  font-weight: 700;
+  border: 1px solid var(--primary-color);
 }
 
-/* Если текущий день одновременно является и выбранным */
 .calendar-days div.today.active {
   background-color: var(--primary-color);
-  color: #ffffff;
-}
-/* ==========================================================================
-   6. Планы и Индикаторы (Под календарем)
-   ========================================================================== */
-
-/* Обязательно для позиционирования точки */
-.calendar-days div {
-  position: relative; 
+  color: #121212;
 }
 
-/* Точка на дне, если есть план */
+/* Точка-индикатор плана */
 .calendar-days div.has-plans::after {
   content: '';
   position: absolute;
@@ -189,10 +186,12 @@ body {
 }
 
 .calendar-days div.active.has-plans::after {
-  background-color: #ffffff;
+  background-color: #121212;
 }
 
-/* Разделитель и блок планов */
+/* ==========================================================================
+   6. Планы и Индикаторы
+   ========================================================================== */
 .calendar-plans {
   margin-top: 20px;
   padding-top: 20px;
@@ -209,9 +208,10 @@ body {
 /* Список задач */
 #plan-list {
   list-style: none;
-  max-height: 140px;
+  max-height: 200px; 
   overflow-y: auto;
   margin-bottom: 12px;
+  padding-right: 4px; 
 }
 
 #plan-list li {
@@ -219,60 +219,64 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background: var(--hover-bg);
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   margin-bottom: 6px;
   font-size: 0.875rem;
+  color: var(--text-main);
 }
 
 #plan-list li button {
   background: none;
   border: none;
-  color: #ef4444;
+  color: #cf6679;
   cursor: pointer;
   font-size: 1.1rem;
   line-height: 1;
-  padding: 0 4px;
+  padding: 2px 6px;
   border-radius: 4px;
   transition: background 0.15s;
 }
 
 #plan-list li button:hover {
-  background: #fee2e2;
+  background: #3b1e24;
 }
 
 /* Поле ввода */
 .plan-input-group {
   display: flex;
   gap: 8px;
+  width: 100%;
 }
 
 .plan-input-group input {
   flex: 1;
+  min-width: 0; 
   padding: 8px 12px;
+  background-color: var(--input-bg);
+  color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   outline: none;
   font-size: 0.875rem;
-  transition: border-color 0.2s;
+}
+
+.plan-input-group button {
+  white-space: nowrap; 
+  padding: 8px 12px;   
+  font-size: 0.85rem; 
+  flex-shrink: 0;      
 }
 
 .plan-input-group input:focus {
   border-color: var(--primary-color);
 }
 
-.plan-input-group button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: background 0.2s;
-}
 
 .plan-input-group button:hover {
   background: var(--primary-hover);
+}
+.btn-ai{
+  border-radius: 8px;
 }

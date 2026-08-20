@@ -17,7 +17,7 @@ const months = [
     'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
 ];
 
-const API_URL = 'http://127.0.0.1:5000/api/plans';
+const API_URL = 'http://192.168.27.13:5000/api/plans';
 
 const today = new Date();
 let currentDate = new Date();
