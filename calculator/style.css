@@ -1,0 +1,54 @@
+button {
+  background-color: #17033c; /* Green */
+  border: none;
+  color: rgb(179, 193, 214);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 20%;
+  border-radius: 12px;
+}
+button:hover {
+  background-color: #3a0027;
+  color: rgb(179, 193, 214);
+}
+.display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensures container spans full width to center child */
+  margin: 0 auto;
+}
+#display {
+  box-sizing: border-box; /* Prevents padding from shifting alignment */
+  display: block;
+  margin: 0 auto;
+  max-height: 100px;
+  width: 82.5%;
+  background-color: #000000;
+  color: rgb(179, 193, 214);
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 20px;
+  padding: 15px 30px;
+}
+#equals{
+    width: 82.5%;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 676767%;
+  width: 100%;
+  background-color: #000000;
+  color: rgb(179, 193, 214);
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+}
