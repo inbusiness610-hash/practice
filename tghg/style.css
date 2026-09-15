@@ -1,0 +1,35 @@
+body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #050515 0%, #0b0c26 60%, #1a1c4b 100%);
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+.glass-button {
+
+  background: rgba(255, 255, 255, 0.15);
+  
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+
+
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25); 
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 5px;
+
+  transition: all 0.3s ease;
+}
+
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
