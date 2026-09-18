@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Main</title>
+</head>
+<body>
+    <div>
+        <h1 style="text-align: center; font-size: 50px; margin-top: 20px;">Welcome to my website</h1>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 30%;">
+        <h1 id="title">Created by: Narek</h1>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 30%;"> 
+        <h2>you can also visit my <a href="https://github.com/inbusiness610-hash" target="_blank">Github account</a></h2>
+    </div>
+    <br>
+    
+    <br>
+    <div style="display: flex; justify-content: center; align-items: center; height: 30%;">
+        <h1>Here are some of my projects created on Informatics lessons</h1>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 30%; margin: 20px;">
+        <button class="glass-button" onclick="window.location.href='first.html'">Go for very first page</button>
+        <button class="glass-button" onclick="window.location.href='hr.html'">Go for HR</button>
+    </div>
+    <br>
+    <hr style="border: 1px solid rgba(0, 243, 255, 0.3); margin: 20px;">
+    <br>
+
+    <div class="slot-container">
+        <div class="slot-machine">
+            <div class="slot-header">
+                <div class="stat-box">
+                    <span>BALANCE</span>
+                    <p id="balance">$100</p>
+                </div>
+                <div class="stat-box">
+                    <span>BET</span>
+                    <p id="bet">$10</p>
+                </div>
+            </div>
+
+
+            <div class="reels">
+                <div class="payline-guide"></div>
+                <div class="reel"><div class="strip"></div></div>
+                <div class="reel"><div class="strip"></div></div>
+                <div class="reel"><div class="strip"></div></div>
+            </div>
+
+            <div class="controls">
+                <button id="sbet" class="bet-btn">-</button>
+                <button id="spin-btn">SPIN</button>
+                <button id="ibet" class="bet-btn">+</button>
+            </div>
+
+            <div id="result">Press SPIN to play!</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
